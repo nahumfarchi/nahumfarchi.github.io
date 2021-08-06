@@ -165,7 +165,7 @@ function wrapString(startingCircle: Circle): Circle[] {
   let nextCircle;
   let ring = [currentCircle];
   let v0, v1;
-  while (true) {
+  do {
     nextCircle = findCandidate(currentCircle, ring);
     if (!nextCircle) {
       break;
@@ -173,11 +173,7 @@ function wrapString(startingCircle: Circle): Circle[] {
 
     ring.push(nextCircle);
     currentCircle = nextCircle;
-
-    if (nextCircle === ring[0]) {
-      break;
-    }
-  }
+  } while (nextCircle !== ring[0]);
 
   return ring;
 }
