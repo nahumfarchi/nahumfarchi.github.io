@@ -87,7 +87,7 @@ const sketch = () => {
     p5.fill(255);
     p5.noStroke();
 
-    // Create  grid
+    // Create grid
     const GRID_SIZE = 5;
     const MARGIN = 100;
     const RADIUS = 50;
@@ -237,10 +237,10 @@ function setDifference(A: any[], B: any[]) {
 We're finally ready to start wrapping our string. We'll choose a starting point and paint it in black:
 
 ```ts
-let currentCircle = choose(choose(circles));
+let startingCircle = choose(choose(circles));
 p5.push();
 p5.fill(0);
-p5.circle(currentCircle.x, currentCircle.y, 2*currentCircle.r);
+p5.circle(startingCircle.x, startingCircle.y, 2*startingCircle.r);
 p5.pop();
 ```
 
