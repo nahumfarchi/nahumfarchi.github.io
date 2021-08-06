@@ -272,7 +272,7 @@ function wrapString(startingCircle: Circle): Circle[] {
 }
 ```
 
-At each step, we ask `findCandidate` for the next circle and then, if one was found, we push it into the `ring`. When `findCandidate` returns to the starting point or was unable to find a unwrapped circle, we break from the loop.
+At each step, we ask `findCandidate` for the next circle and then, if one was found, push it onto the `ring` array. When `findCandidate` returns to the starting point or was unable to find a unwrapped circle, we break from the loop.
 
 This is the code for finding the next circle:
 
