@@ -318,7 +318,7 @@ for (let i = 0; i < ring.length-1; i++) {
 
 <img src="img/ring.png" width="512" height="512">
 
-And we're done! The original piece obviously has a lot more nuance to it, but this is the basic idea (or my interpretation of it anyway). Note that we'll not always be able to close the ring. Here's an example:
+And we're done! You can find all of the code [here](https://github.com/nahumfarchi/nahumfarchi.github.io/blob/main/generative/DIY-ringers.ts). The original piece obviously has a lot more nuance to it, but this is the basic idea (or my interpretation of it anyway). Note that we'll not always be able to close the ring. Here's an example:
 
 <img src="img/open-ring.png" width="512" height="512">
 
