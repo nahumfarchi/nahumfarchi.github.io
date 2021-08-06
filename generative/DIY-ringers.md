@@ -109,7 +109,7 @@ const sketch = () => {
 canvasSketch(sketch, settings);
 ```
 
-![Circle grid](img/circles.png | width=512)
+![Circle grid](img/circles.png =512x512)
 
 Now comes the interesting part. How do we wrap the string? Let's focus on the simple case where there are only two pegs. We can wrap the string either by going around or by going across. In this tutorial I'll handle the first case only. So, we basically want to be able to find these two tangent lines:
 
