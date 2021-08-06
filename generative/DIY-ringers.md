@@ -6,9 +6,9 @@ When I first saw [Ringers](https://artblocks.io/project/13) by [Dmitri Cherniak]
 
 Ok, wrapping a string around a set of pegs. Sounds easy. Well, implementing it turns out to present some challenges, which I'll walk you through in this tutorial. We might not be able to [afford a Ringer](https://opensea.io/assets/art-blocks?search%5BstringTraits%5D%5B0%5D%5Bname%5D=Ringers&search%5BstringTraits%5D%5B0%5D%5Bvalues%5D%5B0%5D=All%20Ringers), but reverse engineering it is free (disclaimer: this is purely for educational purposes).
 
-I'll be using [Typescript](https://www.typescriptlang.org/)+Processing since I hate Javascript and since Processing is awesome. I'll also be using [canvas-sketch](https://github.com/mattdesl/canvas-sketch), which takes care of a lot of the background tasks (saving files, setting up the canvas element, etc). There's a short explanation [here](https://gist.github.com/mattdesl/1e9ab019534838e8c870ae06371be469) on how to set it up with Typescript.
+I'll be using [Typescript](https://www.typescriptlang.org/)+[Processing](https://processing.org/) since I hate Javascript and since Processing is awesome. I'll also be using [canvas-sketch](https://github.com/mattdesl/canvas-sketch), which takes care of a lot of the background tasks (saving images, setting up the canvas element, etc). There's a short explanation [here](https://gist.github.com/mattdesl/1e9ab019534838e8c870ae06371be469) on how to set it up with Typescript.
 
-We'll start by creating a grid of circles, evenly spaced. First, we need to define a simple `Circle` class. We'll also need a `Point` class as well for the circle's position.
+We'll start by creating a grid of evenly spaced circles. First, we need to define a simple `Circle` class. We'll also need a `Point` class for the position of the circle.
 
 ```ts
 class Point {
@@ -109,7 +109,7 @@ const sketch = () => {
 canvasSketch(sketch, settings);
 ```
 
-![Circle grid](img/circles.png)
+![Circle grid](img/circles.png | width=512)
 
 Now comes the interesting part. How do we wrap the string? Let's focus on the simple case where there are only two pegs. We can wrap the string either by going around or by going across. In this tutorial I'll handle the first case only. So, we basically want to be able to find these two tangent lines:
 
