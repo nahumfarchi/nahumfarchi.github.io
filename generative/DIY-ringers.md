@@ -113,7 +113,7 @@ canvasSketch(sketch, settings);
 
 Now comes the interesting part. How do we wrap the string? Let's focus on the simple case where there are only two pegs. We can wrap the string either by going around or by going across. In this tutorial I'll handle the first case only. So, we basically want to be able to find these two tangent lines:
 
-![Connect circles](img/connect-circles.png)
+<img src="img/connect-circles.png" width="512" height="512">
 
 We get the red line by going clockwise from the upper circle to the lower circle, and the green line we get by going counter clockwise (or by going clockwise from the lower circle to the upper circle).
 
@@ -244,7 +244,7 @@ p5.circle(currentCircle.x, currentCircle.y, 2*currentCircle.r);
 p5.pop();
 ```
 
-![Randomly chosen circle](img/chosen-circle.png)
+<img src="img/chosen-circle.png" width="512" height="512">
 
 And then do the string wrapping:
 
@@ -316,10 +316,10 @@ for (let i = 0; i < ring.length-1; i++) {
 }
 ```
 
-![DIY Ring](img/ring.png)
+<img src="img/ring.png" width="512" height="512">
 
 And we're done! The original piece obviously has a lot more nuance to it, but this is the basic idea (or my interpretation of it anyway). Note that we'll not always be able to close the ring. Here's an example:
 
-![Open Ring](img/open-ring.png)
+<img src="img/open-ring.png" width="512" height="512">
 
 We could in theory use some backtracking to make sure that we always find a closed solution, but I'll leave that for a another post.
