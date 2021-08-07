@@ -318,4 +318,4 @@ And we're done! You can find the full source code [here](https://github.com/nahu
 
 <img src="img/open-ring.png" max-width="100%">
 
-We could in theory use some backtracking to make sure that we always find a closed solution, but I'll leave that for a another post.
+We could in theory use some backtracking to make sure that we always find a closed solution, but I'll leave that for another post.
