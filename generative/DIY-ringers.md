@@ -299,7 +299,7 @@ function findCandidate(currentCircle: Circle, ring: Circle[]): Circle | null {
 There's a bit going on here so let's break it down:
 
 1. Compute the candidate neighbors for the current circle. We can jump to any one of our neighbors as long as they were not previously wrapped by the string, which is why we exclude `ring[1...end]`, keeping `ring[0]` so that we can close the ring
-2. Randomly choose one of the candidates. If there are no candidates (`idx < 0`>), return null. Otherwise, compute the cross product of `v0` and `v1`. If it's positive, it means that we can't connect with the peg by going clockwise so we need to try another one. We continue this way until we find a well oriented peg or are out of candidates.
+2. Randomly choose one of the candidates. If there are no candidates (`idx < 0`), return null. Otherwise, compute the cross product of `v0` and `v1`. If it's positive, it means that we can't connect with the peg by going clockwise so we need to try another one. We continue this way until we find a well oriented peg or are out of candidates.
 
 Finally, drawing the ring is straightforward:
 
@@ -314,7 +314,7 @@ for (let i = 0; i < ring.length-1; i++) {
 
 <img src="img/ring.png" max-width="100%">
 
-And we're done! You can find all of the code [here](https://github.com/nahumfarchi/nahumfarchi.github.io/blob/main/generative/DIY-ringers.ts). The original piece obviously has a lot more nuance to it, but this is the basic idea (or my interpretation of it anyway). Note that we'll not always be able to close the ring. Here's an example:
+And we're done! You can find the full source code [here](https://github.com/nahumfarchi/nahumfarchi.github.io/blob/main/generative/DIY-ringers.ts). The original piece obviously has a lot more nuance to it, but this is the basic idea (or my interpretation of it anyway). Note that we'll not always be able to close the ring, for example:
 
 <img src="img/open-ring.png" max-width="100%">
 
