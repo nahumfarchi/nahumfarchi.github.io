@@ -8,10 +8,10 @@ Ok, wrapping a string around a set of pegs. Sounds easy. Well, implementing it t
 
 I'll be using [Typescript](https://www.typescriptlang.org/)+[Processing](https://processing.org/) since I hate Javascript and since Processing is awesome. I'll also be using [canvas-sketch](https://github.com/mattdesl/canvas-sketch), which takes care of a lot of the background tasks (saving images, setting up the canvas element, etc). There's a short explanation [here](https://gist.github.com/mattdesl/1e9ab019534838e8c870ae06371be469) on how to set it up with Typescript.
 
-We'll start by creating a grid of evenly spaced circles. First, we need to define a simple `Circle` class. We'll also need a `Point` class for the position of the circle.
+We'll start by creating a grid of evenly spaced circles. First, we need to define a simple `Circle` class. We'll also need a `Point2d` class for the position of the circle.
 
 ```ts
-class Point {
+class Point2d {
   public readonly x: number;
   public readonly y: number;
 
@@ -120,13 +120,13 @@ We get the red line by going clockwise from the upper circle to the lower circle
 To find these lines, we first need to find the point on each circle which intersects the tangent line. This can be done by connecting a line between the center of each circle and normalizing it. We then rotate it by plus (or minus) PI and multiply by the radius. Adding this vector to the center point of circle gives us the desired intersection points. And in code:
 
 ```ts
-type Line = [Point, Point];
+type Line = [Point2d, Point2d];
 
 // Assumes both circles have the same radius
 function connectCircles(c1: Circle, c2: Circle, ccw: boolean): Line {
   const v = p0p1n(c1.pos, c2.pos).mult(c1.r).rot(ccw ? Math.PI/2 : -Math.PI/2);
-  const p1 = new Point(c1.x+v.x, c1.y+v.y);
-  const p2 = new Point(c2.x+v.x, c2.y+v.y);
+  const p1 = new Point2d(c1.x+v.x, c1.y+v.y);
+  const p2 = new Point2d(c2.x+v.x, c2.y+v.y);
   return [p1, p2];
 }
 ```
@@ -134,7 +134,7 @@ function connectCircles(c1: Circle, c2: Circle, ccw: boolean): Line {
 There are a couple of things going on here. First, we take the center of each circle and compute a normalized vector pointing from one to the other:
 
 ```ts
-function p0p1n(p0: Point, p1: Point): Vec2d {
+function p0p1n(p0: Point2d, p1: Point2d): Vec2d {
   return new Vec2d(p1.x-p0.x, p1.y-p0.y).normalize();
 }
 ```
@@ -288,8 +288,8 @@ function findCandidate(currentCircle: Circle, ring: Circle[]): Circle | null {
       console.log('Could not close the ring :(');
       return null;
     }
-    v0 = p0p1n(new Point(0, 0), currentCircle.pos);
-    v1 = p0p1n(new Point(0, 0), nextCircle.pos);
+    v0 = p0p1n(new Point2d(0, 0), currentCircle.pos);
+    v1 = p0p1n(new Point2d(0, 0), nextCircle.pos);
   } while (cross(v0, v1) > 0 && candidates.length > 0)
 
   return nextCircle;

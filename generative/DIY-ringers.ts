@@ -15,12 +15,12 @@ interface Props {
 }
 
 class Circle {
-  public readonly pos: Point;
+  public readonly pos: Point2d;
   public readonly r: number;
   public neighbors: Circle[];
 
   constructor(x: number, y: number, r: number) {
-    this.pos = new Point(x, y);
+    this.pos = new Point2d(x, y);
     this.r = r;
     this.neighbors = [];
   }
@@ -71,7 +71,7 @@ class CircleGrid {
   }
 }
 
-class Point {
+class Point2d {
   public readonly x: number;
   public readonly y: number;
 
@@ -109,7 +109,7 @@ class Vec2d {
   }
 }
 
-function p0p1n(p0: Point, p1: Point): Vec2d {
+function p0p1n(p0: Point2d, p1: Point2d): Vec2d {
   return new Vec2d(p1.x-p0.x, p1.y-p0.y).normalize();
 }
 
@@ -121,14 +121,14 @@ function setDifference(A: any[], B: any[]) {
   return A.filter(x => B.indexOf(x) < 0);
 }
 
-type Line = [Point, Point];
+type Line = [Point2d, Point2d];
 
 // Assumes both circles have the same radius
 function connectCircles(c1: Circle, c2: Circle, ccw: boolean): Line {
   console.assert(c1.r === c2.r, 'connectCircles: circle rads must be equal!');
   const v = p0p1n(c1.pos, c2.pos).mult(c1.r).rot(ccw ? Math.PI/2 : -Math.PI/2);
-  const p1 = new Point(c1.x+v.x, c1.y+v.y);
-  const p2 = new Point(c2.x+v.x, c2.y+v.y);
+  const p1 = new Point2d(c1.x+v.x, c1.y+v.y);
+  const p2 = new Point2d(c2.x+v.x, c2.y+v.y);
   return [p1, p2];
 }
 
@@ -153,8 +153,8 @@ function findCandidate(currentCircle: Circle, ring: Circle[]): Circle | null {
       console.log('Could not close the ring :(');
       return null;
     }
-    v0 = p0p1n(new Point(0, 0), currentCircle.pos);
-    v1 = p0p1n(new Point(0, 0), nextCircle.pos);
+    v0 = p0p1n(new Point2d(0, 0), currentCircle.pos);
+    v1 = p0p1n(new Point2d(0, 0), nextCircle.pos);
   } while (cross(v0, v1) > 0 && candidates.length > 0)
 
   return nextCircle;
@@ -164,7 +164,6 @@ function wrapString(startingCircle: Circle): Circle[] {
   let currentCircle = startingCircle;
   let nextCircle;
   let ring = [currentCircle];
-  let v0, v1;
   do {
     nextCircle = findCandidate(currentCircle, ring);
     if (!nextCircle) {
