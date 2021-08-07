@@ -1,6 +1,6 @@
 # DIY Ringers
 
-When I first saw [Ringers](https://artblocks.io/project/13) by [Dmitri Cherniak](https://linktr.ee/dmitricherniak), I was blown away by the aesthetic variety of the algorithm. If you're not familiar with it, I highly recommend that you head over to the site and scroll through some of the output results. From the project description:
+When I first saw [Ringers](https://artblocks.io/project/13) by [Dmitri Cherniak](https://linktr.ee/dmitricherniak), I was blown away by the aesthetic variety of the algorithm. If you're not familiar with it, I highly recommend that you head over to the site and scroll through some of the output results. This is groundbreaking generative art. From the project description:
 
 > There are an almost infinite number of ways to wrap a string around a set of pegs. On the surface it may seem like a simple concept but prepare to be surprised and delighted at the variety of combinations the algorithm can produce. Each output from 'Ringers' is derived from a unique transaction hash and generated in Javascript in the browser. Feature variations include peg count, sizing, layout, wrap orientation, and a few colorful flourishes for good measure.
 
@@ -62,9 +62,9 @@ class CircleGrid {
 }
 ```
 
-The main piece of logic here is for evenly distributing the circles. We basically take width/height and divide it by the number rows/columns (minus 1). To adjust for the margins and radius, we subtract $2*(margin+radius)$ from the width/height. This gives us `stepx` and `stepy`, which we then use to position each circle.
+To evenly distribute the circles, we take the width/height and divide it by the number rows/columns (minus 1). To adjust for the margins and radius, we subtract `2*(margin+radius)` from the width/height. This gives us `stepx` and `stepy`, which we then use to position each circle.
 
-Setting up the sketch itself and drawing the circles is rather straightforward. We define the canvas dimensions, the library which we'll be using (Processing in our case), and the `sketch` callback which we pass to the `canvasSketch` init method. Currently, we're just creating the grid and then drawing each circle.
+Setting up the sketch itself and drawing the circles is rather straightforward. In `settings`, we define the canvas dimensions, the library which we'll be using (Processing in our case). We also define a `sketch` callback which we then pass to the `canvasSketch` init method with our `settings`. Currently, the `sketch` callback simply creates the grid and draws each circle.
 
 ```ts
 const settings: any = {
@@ -87,13 +87,13 @@ const sketch = () => {
     p5.fill(255);
     p5.noStroke();
 
-    // Create grid
+    // Create the grid
     const GRID_SIZE = 5;
     const MARGIN = 100;
     const RADIUS = 50;
     const grid = new CircleGrid(GRID_SIZE, GRID_SIZE, width, height, MARGIN, RADIUS);
 
-    // Draw circles
+    // Draw the circles
     p5.noFill();
     p5.stroke(0);
     p5.strokeWeight(5);
@@ -109,15 +109,15 @@ const sketch = () => {
 canvasSketch(sketch, settings);
 ```
 
-<img src="img/circles.png" width="512" height="512">
+<img src="img/circles.png" max-width="100%">
 
 Now comes the interesting part. How do we wrap the string? Let's focus on the simple case where there are only two pegs. We can wrap the string either by going around or by going across. In this tutorial I'll handle the first case only. So, we basically want to be able to find these two tangent lines:
 
-<img src="img/connect-circles.png" width="512" height="512">
+<img src="img/connect-circles.png" max-width="100%">
 
 We get the red line by going clockwise from the upper circle to the lower circle, and the green line we get by going counter clockwise (or by going clockwise from the lower circle to the upper circle).
 
-To find these lines, we first need to find the point on each circle which intersects the tangent line. This can be done by connecting a line between the center of each circle and normalizing it. We then rotate it by $\pm \frac{\pi}{2}$ and multiply by the radius. Adding this vector to the center point of circle gives us the desired intersection points. And in code:
+To find these lines, we first need to find the point on each circle which intersects the tangent line. This can be done by connecting a line between the center of each circle and normalizing it. We then rotate it by plus (or minus) PI and multiply by the radius. Adding this vector to the center point of circle gives us the desired intersection points. And in code:
 
 ```ts
 type Line = [Point, Point];
@@ -139,7 +139,7 @@ function p0p1n(p0: Point, p1: Point): Vec2d {
 }
 ```
 
-We then multiply it by the radius and rotate by $\pm\frac{\pi}{2}$, depending on the parameter `ccw`. The `Vec2d` class used here is pretty standard stuff.
+We then multiply it by the radius and rotate by plus (or minus PI), depending on the parameter `ccw`. The `Vec2d` class used here is pretty standard stuff.
 
 ```ts
 class Vec2d {
@@ -244,7 +244,7 @@ p5.circle(startingCircle.x, startingCircle.y, 2*startingCircle.r);
 p5.pop();
 ```
 
-<img src="img/chosen-circle.png" width="512" height="512">
+<img src="img/chosen-circle.png" max-width="100%">
 
 And then do the string wrapping:
 
@@ -312,10 +312,10 @@ for (let i = 0; i < ring.length-1; i++) {
 }
 ```
 
-<img src="img/ring.png" width="512" height="512">
+<img src="img/ring.png" max-width="100%">
 
 And we're done! You can find all of the code [here](https://github.com/nahumfarchi/nahumfarchi.github.io/blob/main/generative/DIY-ringers.ts). The original piece obviously has a lot more nuance to it, but this is the basic idea (or my interpretation of it anyway). Note that we'll not always be able to close the ring. Here's an example:
 
-<img src="img/open-ring.png" width="512" height="512">
+<img src="img/open-ring.png" max-width="100%">
 
 We could in theory use some backtracking to make sure that we always find a closed solution, but I'll leave that for a another post.
