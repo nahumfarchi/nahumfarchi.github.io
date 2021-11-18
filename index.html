@@ -1,8 +1,26 @@
-<html><head><style>main{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%)}canvas{display:inline}</style></head>
+<html>
+    <head>
+    <script src="mySketch.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/p5@vv1.4.0/lib/p5.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="./style.css">
+    </head>
 <body>
+</body>
 <div>
-<a href="https://twitter.com/nfarxi">https://twitter.com/nfarxi</a> <br />
-<a href="https://linktr.ee/nahumfarchi">https://linktr.ee/nahumfarchi</a>
+    <h1>Tangram</h1>
+    <p>
+        In the Tangram puzzle, a shape is created by arranging 7 possible polygons one adjacent to the other. These polygons are: 2 large right triangles, 1 medium right triangle, 
+        2 small right triangles, a square, and a parallelogram.
+        The goal is usually to recreate a given shape using these polygons. There are over 6500 documented such problems in classic 19th century texts.
+    </p>
+    <p>
+        This algorithm generates a Tangram shape by randomly placing the polygons one adjacent to the other. The shape can be generated either in the classic 7 polygons 
+        schme, or in other, non-classic schemes with a random variety of polygons.       
+    </p>
+    <p>
+        One property of particular interest is that of convexity. A shape is convex if for any two points inside of it, the line segment 
+        connecting them never leaves the shape. It was proven that in the classic scheme there are only 13 such shapes.
+        A second property of interest is the genus of the shape, or the number of "holes" it has.
+        And finally, A third property that might be of interest is the resemblance to various animals - a swan, a lion, or a frog.
+    </p>
 </div>
-<div id="canvas-container"> <script src="/sketch.76f03473.js"></script> </div> 
-</body></html>
+</html>

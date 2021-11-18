@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*font-family: "TT Interphases", sans-serif;*/
+    /*background-color: black;*/
+  }
+  
+  canvas {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  p {
+      font-size: 1rem;
+      font-weight: 400;
+      font-style: normal;
+      max-width: 65ch;
+  }
