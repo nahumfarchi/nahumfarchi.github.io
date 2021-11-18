@@ -1,3 +1,5 @@
+const START = new Date();
+const SEED = Math.floor(START/1000);
 const COLORS_HEX = ["114b5f","028090","e4fde1","456990","f45b69"].map(x => '#'+x);
 const palettes = [
 	{ val: ["f5e3e0","2e86ab","3b1f2b","070707","d84727"].map(x => '#'+x), weight: 100, name: "Embroidery" },
@@ -7,9 +9,10 @@ const palettes = [
 ];
 //let COLORS;
 let COLORS0;
-let COLORS2;
+let COLORS1;
 let MARGIN;
 let DIM;
+let M;
 const DEBUG = false;
 const ALPHA = 100;
 let N_SHAPES = 10;
@@ -17,20 +20,31 @@ const N_ATTEMPTS = 10;
 const BASE_SIZE = 1024;
 const LINE_WIDTH = 4;
 
-function setup() {
-	windowWidth = windowHeight = 1024;
-	MARGIN = windowWidth/10;
+function onResize(width, height) {
 	DIM = min(windowWidth, windowHeight);
+	MARGIN = DIM/10;
 	//COLORS = COLORS_HEX.map(x => color(x));
 	M = DIM/BASE_SIZE;
-	
+}
+
+function setup() {
+	onResize(windowWidth, windowHeight);	
 	createCanvas(DIM, DIM);
 	//const backgroundColor = color(random(COLORS));
 	const backgroundColor = color(255);
 	background(backgroundColor);
 	fill(0);
 	noStroke();
-	
+	noLoop();
+}
+
+function windowResized() { 
+	onResize(windowWidth, windowHeight);
+	resizeCanvas(DIM, DIM);
+};
+
+function draw() {
+	randomSeed(SEED);
 	COLORS0 = random(palettes).val.map(hex => color(hex));
 	COLORS1 = random(palettes).val.map(hex => color(hex));
 	N_SHAPES = random([0, 1, 2, 3, 5, 10, 20]);
@@ -44,7 +58,7 @@ function setup() {
 	drawTriangle(t1);
 	console.log(`t0 t1 intersect = ${triTriIntersect(t0, t1)}`);*/
 	
-	const midPt = createVector(windowWidth/2-110, windowHeight/2);
+	const midPt = createVector(DIM/2-M*110, DIM/2);
 	const scale = DIM/2.5;
 	let pt = createVector(midPt.x, midPt.y);
 	const d0 = ShapeProps.LargeTriangle.d[0]*scale;
@@ -128,9 +142,9 @@ function setup() {
 	
 	const shapesCenter = centerOfMass(shapes);
 	logPt(shapesCenter);
-	if (DEBUG) { fill(255,0,0); circle(shapesCenter.x, shapesCenter.y, 10); }
-	translate(-shapesCenter.x+windowWidth/2, -shapesCenter.y+windowHeight/2);
-	if (DEBUG) { fill(0,255,0); circle(shapesCenter.x, shapesCenter.y, 10); }
+	if (DEBUG) { fill(255,0,0); circle(shapesCenter.x, shapesCenter.y, M*10); }
+	translate(-shapesCenter.x+DIM/2, -shapesCenter.y+DIM/2);
+	if (DEBUG) { fill(0,255,0); circle(shapesCenter.x, shapesCenter.y, M*10); }
 	
 	push();
 	for (const s of shapes) {
@@ -143,12 +157,6 @@ function setup() {
 		s.draw();
 	}
 	pop();
-}
-
-function windowResized() { 
-};
-
-function draw() {
 }
 
 /*function mouseClicked() {
