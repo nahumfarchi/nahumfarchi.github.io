@@ -145,6 +145,9 @@ function setup() {
 	pop();
 }
 
+function windowResized() { 
+};
+
 function draw() {
 }
 

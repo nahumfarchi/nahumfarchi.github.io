@@ -1,12 +1,12 @@
 body {
-    margin: 0;
+    /*margin: 0;
     padding: 0;
     width: 100vw;
-    height: 100vh;
-    overflow: hidden;
+    height: 100vh;*/
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     /*font-family: "TT Interphases", sans-serif;*/
     /*background-color: black;*/
   }
@@ -21,4 +21,7 @@ body {
       font-weight: 400;
       font-style: normal;
       max-width: 65ch;
+  }
+
+  #project-description {
   }
