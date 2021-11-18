@@ -21,7 +21,7 @@ const BASE_SIZE = 1024;
 const LINE_WIDTH = 4;
 
 function onResize(width, height) {
-	DIM = min(windowWidth, windowHeight);
+	DIM = min(windowWidth/1.5, windowHeight/1.5);
 	MARGIN = DIM/10;
 	//COLORS = COLORS_HEX.map(x => color(x));
 	M = DIM/BASE_SIZE;
