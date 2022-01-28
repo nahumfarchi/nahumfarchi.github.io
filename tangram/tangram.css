@@ -45,9 +45,11 @@ p {
 }
 */
 
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
+/* Medium screen */
+@media only screen and (min-width: 812px) and (max-width: 1024px) {
 	#tangram-container {
-		height: calc(100vh - 300px);
+		/*height: calc(100vh - 300px);*/
+		height: 100vw;
 		padding: 4rem;
 	}
 	
@@ -56,6 +58,7 @@ p {
 	}
 }
 
+/* Large screen */
 @media only screen and (min-width: 1024px) {
 	#tangram-container {
 		height: calc(100vh - 300px);
@@ -74,7 +77,8 @@ p {
 	}
 }
 
-@media only screen and (min-width: 0px) and (max-width: 768px) {
+/* Small screen */
+@media only screen and (min-width: 0px) and (max-width: 812px) {
 	#tangram-container {
 		height: 100vw;
 	}

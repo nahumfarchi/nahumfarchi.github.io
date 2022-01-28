@@ -25,18 +25,18 @@
     <p>
         This algorithm generates a Tangram shape by randomly placing the polygons one adjacent to the other. 
         The shape can be generated either in the classic 7-polygon scheme, or in other, non-classic schemes with a random variety of polygons.
-		In each step, a free edge is searched for on which we attempt to place the next polygon. All possible orientations are checked for until a non-colliding fit is found. If none is found, we move on to the next free edge.
+		In each step of the process, we attempt to place the next polygon on the contour of the shape built up to that point. 
+		All possible orientations are checked for until a non-colliding fit is found.
 		The sampling of the polygons can be either with or without replacement.
     </p>
+	<!--
     <p>
         The Tangram puzzle has a few emergent properties which I personally find fascinating. One of particular interest is convexity. 
         A shape is convex if for any two points inside it, the line segment connecting them stays within the boundary. 
         It was proven that for the classic scheme there are only 13 such shapes. For this reason, it is extremely unlikely to get a convex shape in this setup.
 		A second property of interest is the genus of the shape, or the number of "holes" it has. 
     </p>
-	<p>
-		Please note that some of the styles can take a while to render.
-	</p>
+	-->
     <p>
         <a href="https://twitter.com/nfarxi">twitter</a><br />
         <a href="https://linktr.ee/nahumfarchi">linktr</a><br />
