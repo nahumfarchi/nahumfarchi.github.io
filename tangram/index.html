@@ -1,21 +1,47 @@
-<!doctype html><html><head><title>FXHASH project</title><script id="fxhash-snippet">//---- do not edit the following code (you can indent as you wish)
-      let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
-      var fxhash = "oo" + Array(49).fill(0).map(_=>alphabet[(Math.random()*alphabet.length)|0]).join('')
-      let b58dec = (str) => str.split('').reduce((p,c,i) => p + alphabet.indexOf(c) * (Math.pow(alphabet.length, str.length-i-1)), 0)
-      let fxhashTrunc = fxhash.slice(2)
-      let regex = new RegExp(".{" + ((fxhash.length/4)|0) + "}", 'g')
-      let hashes = fxhashTrunc.match(regex).map(h => b58dec(h))
-      let sfc32 = (a, b, c, d) => {
-        return () => {
-          a |= 0; b |= 0; c |= 0; d |= 0
-          var t = (a + b | 0) + d | 0
-          d = d + 1 | 0
-          a = b ^ b >>> 9
-          b = c + (c << 3) | 0
-          c = c << 21 | c >>> 11
-          c = c + t | 0
-          return (t >>> 0) / 4294967296
-        }
-      }
-      var fxrand = sfc32(...hashes)
-      //---- /do not edit the following code</script><link rel="stylesheet" href="./style.css"></head><body><script defer="defer" src="./bundle.js"></script></body></html>
+<html>
+    <head>
+    <!--<script src="mySketch.js" type="text/javascript"></script><script src="https://cdn.jsdelivr.net/npm/p5@vv1.4.0/lib/p5.js" type="text/javascript"></script>-->
+    <link rel="stylesheet" href="./tangram.css">
+	<title>Tangram</title>
+    </head>
+<body>
+</body>
+
+<div id="tangram-container">
+	<iframe src="./gen-tangram.html" sandbox="allow-scripts allow-same-origin" class="tangram-iframe" allow="accelerometer; camera; gyroscope; microphone; xr-spatial-tracking;"></iframe>
+</div>
+
+<div id="project-description">
+    <h1>Tangram</h1>
+	<p>
+		Tangram is a playful exploration of geometry and pattern. From a finite set of simple polygons, a limitless variety of shapes and forms arises. Some are purely abstract, while others resemble animal forms - a swan, a lion, or perhaps a frog.
+	</p>
+	<h3>Technical Details</h3>
+    <p>
+		In the classic Tangram puzzle, a shape is created by arranging 7 possible polygons, one adjacent to the other.
+		These polygons are: two large triangles, one medium triangle, two small triangles, a square, and a parallelogram.
+		The goal is usually to recreate a given shape using these polygons. There are over 6,500 documented such problems in classic texts.
+    </p>
+    <p>
+        This algorithm generates a Tangram shape by randomly placing the polygons one adjacent to the other. 
+        The shape can be generated either in the classic 7-polygon scheme, or in other, non-classic schemes with a random variety of polygons.
+		In each step, a free edge is searched for on which we attempt to place the next polygon. All possible orientations are checked for until a non-colliding fit is found. If none is found, we move on to the next free edge.
+		The sampling of the polygons can be either with or without replacement.
+    </p>
+    <p>
+        The Tangram puzzle has a few emergent properties which I personally find fascinating. One of particular interest is convexity. 
+        A shape is convex if for any two points inside it, the line segment connecting them stays within the boundary. 
+        It was proven that for the classic scheme there are only 13 such shapes. For this reason, it is extremely unlikely to get a convex shape in this setup.
+		A second property of interest is the genus of the shape, or the number of "holes" it has. 
+    </p>
+	<p>
+		Please note that some of the styles can take a while to render.
+	</p>
+    <p>
+        <a href="https://twitter.com/nfarxi">twitter</a><br />
+        <a href="https://linktr.ee/nahumfarchi">linktr</a><br />
+    </p>
+</div>
+
+
+</html>
