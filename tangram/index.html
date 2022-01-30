@@ -5,13 +5,16 @@
 	<title>Tangram</title>
     </head>
 <body>
-</body>
 
-<div id="tangram-container">
-	<iframe src="./gen-tangram.html" sandbox="allow-scripts allow-same-origin" class="tangram-iframe" allow="accelerometer; camera; gyroscope; microphone; xr-spatial-tracking;"></iframe>
+<div id="tangram-container" >
+	<iframe id="tangram-iframe" src="./gen-tangram.html" sandbox="allow-scripts allow-same-origin" class="tangram-iframe" allow="accelerometer; camera; gyroscope; microphone; xr-spatial-tracking;"></iframe>
 </div>
 
-<div id="project-description">
+<div id="project-description" onclick="console.log('project-description');">
+	<p style="text-align: center;">
+		<a href="" id="mybutton" onclick="console.log('button'); document.getElementById('tangram-iframe').src += '';">[  R E F R E S H  ]</a>
+	</p>
+	
     <h1>Tangram</h1>
 	<p>
 		Tangram is a playful exploration of geometry and pattern. From a finite set of simple polygons, a limitless variety of shapes and forms arises. Some are purely abstract, while others resemble animal forms - a swan, a lion, or perhaps a frog.
@@ -43,5 +46,5 @@
     </p>
 </div>
 
-
+</body>
 </html>
